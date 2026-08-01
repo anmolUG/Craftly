@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coder Buddy — AI Code Generator</title>
+    <meta name="description" content="AI-powered multi-agent coding assistant that generates complete projects from natural language prompts.">
+    <link rel="stylesheet" href="/static/styles.css?v=3">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="logo">
+                    <div class="logo-icon">CB</div>
+                    <span>Coder Buddy</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="status-badge" id="statusBadge">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Ready</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Split Panels -->
+        <main class="main-content">
+            <!-- Left Panel: Agent Activity -->
+            <section class="panel-left">
+                <div class="panel-header">
+                    <span class="panel-title">Agent Activity</span>
+                </div>
+
+                <div class="activity-feed" id="activityFeed">
+                    <!-- Welcome screen shown initially -->
+                    <div class="welcome-screen" id="welcomeScreen">
+                        <div class="welcome-title">What do you want to build?</div>
+                        <div class="welcome-sub">
+                            Describe your project and watch the AI agents plan, architect, and code it in real-time.
+                        </div>
+                        <div class="welcome-suggestions">
+                            <button class="suggestion-chip" onclick="useSuggestion(this)">Create a to-do list app with HTML, CSS, and JS</button>
+                            <button class="suggestion-chip" onclick="useSuggestion(this)">Build a simple calculator web app</button>
+                            <button class="suggestion-chip" onclick="useSuggestion(this)">Create a weather dashboard with mock data</button>
+                            <button class="suggestion-chip" onclick="useSuggestion(this)">Build a personal portfolio page</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt Input -->
+                <div class="prompt-area">
+                    <div class="prompt-container">
+                        <textarea
+                            class="prompt-input"
+                            id="promptInput"
+                            placeholder="Describe your project..."
+                            rows="1"
+                            autofocus
+                        ></textarea>
+                        <button class="send-btn" id="sendBtn" onclick="sendPrompt()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"></line>
+                                <polyline points="5 12 12 5 19 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Code & Preview -->
+            <section class="panel-right">
+                <!-- Tab Bar -->
+                <div class="tab-bar" id="tabBar">
+                    <button class="tab tab-preview" id="previewTab" onclick="switchToPreview()" style="display:none;">
+                        <span>◉</span>
+                        <span>Preview</span>
+                    </button>
+                </div>
+
+                <!-- Code Viewer -->
+                <div class="code-viewer" id="codeViewer">
+                    <!-- Empty state -->
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-state-icon">{ }</div>
+                        <div class="empty-state-text">No files generated yet</div>
+                        <div class="empty-state-sub">Enter a prompt to start building</div>
+                    </div>
+
+                    <!-- Preview iframe (hidden by default) -->
+                    <iframe class="preview-frame" id="previewFrame" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js?v=3"></script>
+</body>
+</html>
